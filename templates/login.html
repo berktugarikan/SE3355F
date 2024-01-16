@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Register</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/logo.png') }}" alt=""></a>
+            <h1><a href="{{ url_for('home') }}">VIP Rent a Car</a></h1>
+        </div>
+    </div>
+
+    <div class="login-container">
+       <div class="login-form">
+            <h1>Giriş Yap</h1>
+            <form action="{{ url_for('login') }}" method="post">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Şifre:</label>
+                    <input type="password" name="password" id="password" class="form-control" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Giriş Yap</button>
+                <a href="{{ url_for('google_login') }}" class="login-button">Google ile Giriş Yap</a>
+            </form>
+            <button id="toggle-forms" class="btn btn-primary" onclick="toggleRegisterForm()">Üye Ol</button>            
+
+        </div>
+        <div class="register-form">
+            <h2>Kayıt Ol</h2>
+        <form action="{{ url_for('register') }}" method="post">
+            <div class="form-group">
+                <label for="register_email">Email:</label>
+                <input type="email" name="email" id="register_email" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="register_password">Şifre (en az 8 karakter, 1 sayı ve 1 alfasayısal olmayan karakter):</label>
+                <input type="password" name="password" id="register_password" class="form-control" required pattern="(?=.*\d)(?=.*[^\d\w]).{8,}" title="Password must be at least 8 characters long and include 1 number and 1 non-alphanumeric character">
+            </div>
+
+            <div class="form-group">
+                <label for="confirm_password">Tekrar Şifre</label>
+                <input type="password" name="confirm_password" id="confirm_password" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="first_name">Ad:</label>
+                <input type="text" name="first_name" id="first_name" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="last_name">Soyad:</label>
+                <input type="text" name="last_name" id="last_name" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="country">Ülke:</label>
+                <select name="country" id="country" class="form-control" required>
+                    <option value="" disabled selected>Ülke Seçin</option>
+                    
+                    <option value="Türkiye">Türkiye</option>
+                    <option value="İtalya">İtalya</option>
+                    
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="city">Şehir:</label>
+                <select name="city" id="city" class="form-control" required>
+                    <option value="" disabled selected>Şehir Seçin</option>
+                    
+                    <option value="İstanbul">İstanbul</option>
+                    <option value="Ankara">Ankara</option>
+                    <option value="İzmir">İzmir</option>
+                    <option value="Muğla">Muğla</option>
+                    <option value="Milano">Milano</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+        </form>
+        </div>  
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var registerForm = document.querySelector('.register-form');
+            registerForm.style.display = 'none';
+        });
+
+        function toggleRegisterForm() {
+            var registerForm = document.querySelector('.register-form');
+            registerForm.style.display = registerForm.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+    
+</body>
+
+</html>

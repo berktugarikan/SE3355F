@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/logo.png') }}" alt=""></a>
+            <h1><a href="{{ url_for('home') }}">VIP Rent a Car</a></h1>
+        </div>
+
+        <div class="user-section">
+            {% if not user %}
+                <a href="{{ url_for('login') }}" class="btn btn-primary">Giriş Yap</a>
+            {% else %}
+                <p>Hoş Geldiniz, {{ user.first_name }} {{ user.last_name }}!</p>
+                <a href="{{ url_for('logout') }}" class="btn btn-primary">Çıkış Yap</a>
+                
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="office-detail-container">
+        <div class="office-image">
+            <img src="{{ url_for('static', filename='images/' + vehicle.image_url) }}" alt="">
+        </div>
+        <div class="office-info">
+            <h2>{{ vehicle.name }}</h2>
+            <p class="city">{{ vehicle.city }} bölgesinde otel</p>
+            <p class="rating">{{ vehicle.rating }} puan ({{ vehicle.num_comments }} yorum)</p>
+            <p><strong>Popüler konaklama yeri imkan ve özellikleri</strong></p>
+            <p class="amenities">{{ vehicle.amenities }}</p>
+
+            {% if not vehicle.special_discount and not vehicle.member_discount %}
+               
+                <p class="price">{{ vehicle.price }} TL</p>
+            {% endif %}
+
+            {% if vehicle.special_discount and not vehicle.member_discount %}
+                
+                <p class="price-with-discount">
+                    <span class="discounted-price">{{ vehicle.price - (vehicle.price * vehicle.special_discount) }} TL</span>
+                    <span class="original-price"><del>{{ vehicle.price }} TL</del></span>
+                </p>
+            {% endif %}
+
+            {% if not vehicle.special_discount and vehicle.member_discount %}
+                
+                
+                {% if user %}
+                    <p class="price-with-discount">
+                        <span>{{ (vehicle.price - (vehicle.price * vehicle.special_discount)) - ((vehicle.price - (vehicle.price * vehicle.special_discount)) * 0.1) }} TL</span>
+                        <span class="original-price"><del>{{ vehicle.price }} TL</del></span>
+                    </p>
+                {% else %}
+                    <p class="price">{{ vehicle.price }} TL</p>
+                    <a href="{{ url_for('login') }}" class="btn btn-primary">Üye Fiyatı İçin Giriş Yapın</a>
+                {% endif %}
+            {% endif %}
+
+            {% if vehicle.special_discount and vehicle.member_discount %}
+                
+                {% if user %}
+                    <p class="price-with-discount">
+                        <span>{{ (vehicle.price - (vehicle.price * vehicle.special_discount)) - ((vehicle.price - (vehicle.price * vehicle.special_discount)) * 0.1) }} TL</span>
+                        <span class="original-price"><del>{{ vehicle.price }} TL</del></span>
+                    </p>
+                {% else %}
+                <p class="price-with-discount">
+                    <span>{{ (vehicle.price - (vehicle.price * vehicle.special_discount))}} TL</span>
+                    <span class="original-price"><del>{{ vehicle.price }} TL</del></span>
+                </p>
+                    <a href="{{ url_for('login') }}" class="btn btn-primary">Üye Fiyatı İçin Giriş Yapın</a>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    <div id="map-container">
+        <iframe
+            width="100%"
+            height="100%"
+            frameborder="0" style="border:0"
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAtt86W_hVVd3S9OyNXm8pNyloCOFv5ShU&q={{ vehicle.map_coordinates }}">
+        </iframe>
+        
+    </div>
+
+</body>
+
+</html>

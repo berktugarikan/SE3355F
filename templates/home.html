@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent a Car</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/logo.png') }}" alt=""></a>
+            <h1><a href="{{ url_for('home') }}">VIP Rent a Car</a></h1>
+        </div>
+
+        <div class="user-section">
+            {% if not user %}
+            <a href="{{ url_for('login') }}" class="btn btn-primary">Giriş Yap</a>
+            {% else %}
+            <p>Hoş Geldiniz, {{ user.first_name }} {{ user.last_name }}!</p>
+            <a href="{{ url_for('logout') }}" class="btn btn-primary">Çıkış Yap</a>
+            
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="search-container">
+        <h1>Ofisler</h1>
+        <form id="search_form" action="{{ url_for('search') }}" method="post">
+            <div class="search-box">
+                <div class="form-group">
+                    <input type="text" name="city" id="city" class="form-control">
+                </div>
+    
+                <div class="form-group">
+                    <label for="date">Tarih:</label>
+                    <input type="date" name="date" id="date" class="form-control">
+                </div>
+    
+
+                
+                <input type="hidden" name="form_type" value="search_form">
+    
+                <button type="button" class="btn btn-primary" onclick="validateSearchForm()">Ara</button>
+            </div>
+        </form>
+    </div>
+    
+    
+
+    <div class="office-list-container">
+        <div class="office-list">
+            {% for office in offices %}
+                <div class="office-card">
+                    <a href="{{ url_for('office_detail', office_id=office.id) }}" class="office-card-link">
+                        <img src="{{ url_for('static', filename='images/' + office.image_url) }}" alt="">
+                        <div class="office-info">
+                            <p>{{ office.rating }} puan ({{ office.num_comments }} yorum)</p>
+                            <h3>{{ office.name }}</h3>
+                            <p>{{ office.city }}</p>
+                        </div>
+                    </a>
+                </div>
+    
+                {% if loop.index % 3 == 0 %}<div class="clearfix"></div>{% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    
+    
+   
+</div>
+
+<script>
+    function validateSearchForm() {
+        // Formdaki alanları kontrol et
+        var city = document.getElementById('city').value;
+        var date = document.getElementById('date').value;
+        var guestCount = document.getElementById('guest_count').value;
+
+        // En az bir alanın doldurulup doldurulmadığını kontrol et
+        if (city || date || guestCount) {
+            // Formu submit et
+            document.getElementById('search_form').submit();
+        } else {
+            // Kullanıcıya uyarı göster
+            alert('Lütfen en az bir arama kriteri belirtin.');
+        }
+    }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offices Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="logo">
+            <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/logo.png') }}" alt=""></a>
+            <h1><a href="{{ url_for('home') }}">Avis.com</a></h1>
+        </div>
+
+        <div class="user-section">
+            {% if not user %}
+                <a href="{{ url_for('login') }}" class="btn btn-primary">Giriş Yap</a>
+            {% else %}
+                <p>Hoş Geldiniz, {{ user.first_name }} {{ user.last_name }}!</p>
+                <a href="{{ url_for('logout') }}" class="btn btn-primary">Çıkış Yap</a>
+               
+            {% endif %}
+        </div>
+    </div>
+   
+
+    <div class="search-results-container">
+        <h2>Arama Sonuçları</h2>
+        <div class="office-list">
+            {% for office in search_results %}
+            <div class="office-card">
+                <a href="{{ url_for('office_detail', office_id=office.id) }}" class="office-card-link">
+                    <img src="{{ url_for('static', filename='images/' + office.image_url) }}" alt="Office Image">
+                    <div class="office-info">
+                        <p>{{ office.rating }} puan ({{ office.num_comments }} yorum)</p>
+                        <h3>{{ office.name }}</h3>
+                        <p>{{ office.city }}</p>
+
+
+
+                    </div>
+                </a>
+            </div>
+                
+                {% if loop.index % 3 == 0 %}<div class="clearfix"></div>{% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+
+</html>

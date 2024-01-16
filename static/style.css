@@ -1,0 +1,220 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #d4002a;
+    color: #fff;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    max-height: 100px; 
+    margin-right: 50px; 
+}
+
+.logo h1 a {
+    text-decoration: none;
+    color: inherit;
+    margin: 0;
+    font-size: 24px;
+}
+
+.user-section {
+    display: flex;
+    align-items: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.btn-primary {
+    background-color: #007bff;
+}
+
+.search-container {
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.search-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+.search-container h1 {
+    margin: 0;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column; 
+    margin-bottom: 10px; 
+}
+
+.form-group label {
+    margin-bottom: 5px; 
+   
+}
+
+.form-control {
+    width: calc(100% - 20px); 
+    padding: 8px; 
+    box-sizing: border-box; 
+    border-radius: 5px;
+    
+}
+
+.btn {
+    margin-left: auto;
+}
+
+.office-list-container {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff; 
+    border-radius: 5px;
+}
+
+.office-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+    margin-left: -10px;
+}
+
+.office-card {
+    flex: 0 0 calc(25% - 20px);
+    margin: 10px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    text-align: center;
+    max-width: 100%; 
+    height: auto; 
+}
+
+.office-card:hover {
+    transform: scale(1.05); 
+}
+.office-card-link {
+    text-decoration: none; 
+    color: inherit; 
+}
+
+.office-card-link:hover {
+    color: inherit; 
+}
+.discount-amount {
+    background-color: red;
+    color: white;
+    display: block;
+    width: max-content; 
+    border-radius: 5px;
+    padding: 3px;
+    margin: 0 auto 10px;
+}
+
+.mprc-available {
+    background-color: #752fe6;
+    color: white;
+    display: block;
+    width: max-content; 
+    border-radius: 5px;
+    padding: 3px;
+    margin: 0 auto;
+}
+
+.member-price {
+    font-size: 1.2em;
+    color: #2d6ac5;
+}
+.login-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.login-form,
+.register-form {
+    flex: 0 0 calc(40% - 20px); 
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.btn {
+    margin-top: 10px;
+}
+
+
+ 
+  .login-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #007bff; 
+    color: #ffffff;
+  }
+
+
+.office-detail-container {
+    display: flex;
+    margin-top: 40px;
+    margin-left: 25px;
+}
+
+.office-image {
+    flex: 1;
+    margin-right: 20px;
+    max-width: 400px; 
+    width: 100%;
+    height: auto;
+}
+
+.office-info {
+    flex: 2;
+    max-width: 400px; 
+    padding: 10px; 
+    box-sizing: border-box; 
+}
